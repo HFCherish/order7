@@ -9,6 +9,7 @@ import java.util.Map;
 public class TestHelper {
 
     public static final String USER_NAME = "Imran";
+    public static final String INVALID_USER_NAME = "DFU09';'";
 
     public static Product prepareProduct(ProductRepository productRepository) {
         return productRepository.save(productJsonForTest());
