@@ -11,4 +11,7 @@ public class Routes {
         baseUri = uriInfo.getBaseUri().toASCIIString();
     }
 
+    public URI productUrl(long id) {
+        return URI.create(baseUri + "products/" + id);
+    }
 }

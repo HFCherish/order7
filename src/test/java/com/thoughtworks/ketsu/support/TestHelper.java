@@ -1,6 +1,10 @@
 package com.thoughtworks.ketsu.support;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TestHelper {
+
 //
 //    public static User userForTest(String id, String name, UserRole role) {
 //        String password_123 = "$2a$04$DbgJbGA4dkQSzAvXvJcGBOv5kHuMBzrWfne3x3Cx4JQv4IJcxtBIW";
@@ -14,10 +18,11 @@ public class TestHelper {
 //        return user;
 //    }
 //
-//    public static Map<String, Object> userJsonForTest(User user) {
-//        return new HashMap<String, Object>() {{
-//            put("id", user.getUserId().id());
-//            put("role", user.getRole());
-//        }};
-//    }
+    public static Map<String, Object> productJsonForTest() {
+        return new HashMap<String, Object>() {{
+            put("name", "Imran");
+            put("description", "teachers");
+            put("price", 1.1);
+        }};
+    }
 }
