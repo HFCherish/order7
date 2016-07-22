@@ -23,9 +23,9 @@ public class ProductRepositoryTest {
     public void should_save_and_get_product() {
 
         Product product = productRepository.save(productJsonForTest());
-        Optional<Product> fetched = productRepository.findById(789l);
+        Optional<Product> fetched = productRepository.findById(product.getId());
 
         assertThat(fetched.isPresent(), is(true));
-
+        assertThat(fetched.get().getId(), is(product.getId()));
     }
 }
