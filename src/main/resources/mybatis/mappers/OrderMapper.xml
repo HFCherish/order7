@@ -31,4 +31,15 @@
         WHERE user_id = #{userId}
     </select>
 
+    <insert id="pay">
+        INSERT into payments (order_id, amount, type)
+        VALUES (#{id}, #{info.amount}, #{info.pay_type})
+    </insert>
+
+    <select id="findPayment" resultMap="records.payment">
+        SELECT *
+        FROM payments
+        WHERE order_id = #{id}
+    </select>
+
 </mapper>
