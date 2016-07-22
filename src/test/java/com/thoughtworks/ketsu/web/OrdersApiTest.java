@@ -13,6 +13,10 @@ import org.junit.runner.RunWith;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import static com.thoughtworks.ketsu.support.TestHelper.orderJsonForTest;
 import static com.thoughtworks.ketsu.support.TestHelper.prepareProduct;
 import static com.thoughtworks.ketsu.support.TestHelper.prepareUser;
@@ -48,5 +52,16 @@ public class OrdersApiTest extends ApiSupport {
         assertThat(response.getStatus(), is(201));
         assertThat(response.getLocation().toString(), containsString(orderBaseUrl));
         assertThat(response.getLocation().toString().matches(".*/\\d+$"), is(true));
+    }
+
+    @Test
+    public void should_400_when_create_order_given_incomplete_param() {
+        Response response = post(orderBaseUrl, new HashMap());
+
+        assertThat(response.getStatus(), is(400));
+        List errors = (List)response.readEntity(Map.class).get("items");
+        Map nameEmpty = (Map) errors.get(0);
+        assertThat(nameEmpty.get("field"), is("name"));
+        assertThat(nameEmpty.get("message").toString(), containsString("name can not be empty"));
     }
 }
