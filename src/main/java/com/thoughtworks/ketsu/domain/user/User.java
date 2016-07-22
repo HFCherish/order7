@@ -5,6 +5,7 @@ import com.thoughtworks.ketsu.web.jersey.Routes;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class User implements Record{
     private long id;
@@ -30,5 +31,13 @@ public class User implements Record{
     @Override
     public Map<String, Object> toJson(Routes routes) {
         return toRefJson(routes);
+    }
+
+    public Order placeOrder(Map info) {
+        return null;
+    }
+
+    public Optional<Order> getOrderById(long id) {
+        return Optional.ofNullable(new Order());
     }
 }
