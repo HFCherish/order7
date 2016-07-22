@@ -8,6 +8,7 @@
         name,
         address,
         phone,
-        user_id
+        user_id,
+        created_at
     </sql>
 </mapper>

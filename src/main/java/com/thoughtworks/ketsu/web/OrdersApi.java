@@ -3,7 +3,6 @@ package com.thoughtworks.ketsu.web;
 import com.thoughtworks.ketsu.domain.user.User;
 import com.thoughtworks.ketsu.web.jersey.Routes;
 import com.thoughtworks.ketsu.web.validators.OrderValidator;
-import org.apache.ibatis.annotations.Param;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;

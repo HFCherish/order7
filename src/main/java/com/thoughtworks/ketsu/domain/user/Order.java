@@ -1,14 +1,21 @@
 package com.thoughtworks.ketsu.domain.user;
 
-import java.util.List;
+import com.thoughtworks.ketsu.infrastructure.records.Record;
+import com.thoughtworks.ketsu.web.jersey.Routes;
+import org.joda.time.DateTime;
 
-public class Order {
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Order implements Record{
     private long id;
     private long userId;
     private String name;
     private String address;
     private String phone;
     private List<OrderItem> orderItems;
+    private DateTime createdAt;
 
     public long getId() {
         return id;
@@ -32,5 +39,26 @@ public class Order {
 
     public List<OrderItem> getOrderItems() {
         return orderItems;
+    }
+
+    @Override
+    public Map<String, Object> toRefJson(Routes routes) {
+        return new HashMap<String, Object>() {{
+            put("uri", routes.orderUrl(getUserId(), getId()));
+            put("name", getName());
+            put("address", getAddress());
+            put("phone", getPhone());
+            put("created_at", getCreatedAt());
+
+        }};
+    }
+
+    @Override
+    public Map<String, Object> toJson(Routes routes) {
+        return toRefJson(routes);
+    }
+
+    public DateTime getCreatedAt() {
+        return createdAt;
     }
 }
