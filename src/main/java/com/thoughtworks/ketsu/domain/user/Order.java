@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Order implements Record{
+public class Order implements Record {
     private long id;
     private long userId;
     private String name;
@@ -50,6 +50,7 @@ public class Order implements Record{
             put("address", getAddress());
             put("phone", getPhone());
             put("created_at", getCreatedAt());
+            put("total_price", getTotalPrice());
 
         }};
     }
@@ -57,7 +58,7 @@ public class Order implements Record{
     @Override
     public Map<String, Object> toJson(Routes routes) {
         List itemsInfo = new ArrayList<>();
-        for(OrderItem item: orderItems) {
+        for (OrderItem item : orderItems) {
             itemsInfo.add(item.toJson(routes));
         }
         Map<String, Object> info = toRefJson(routes);
@@ -67,5 +68,12 @@ public class Order implements Record{
 
     public DateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public double getTotalPrice() {
+        double res = 0;
+        for (OrderItem orderItem : orderItems)
+            res += orderItem.getAmount() * orderItem.getQuantity();
+        return res;
     }
 }
