@@ -1,13 +1,11 @@
 package com.thoughtworks.ketsu.domain.user;
 
 import com.thoughtworks.ketsu.infrastructure.records.Record;
+import com.thoughtworks.ketsu.web.PaymentApi;
 import com.thoughtworks.ketsu.web.jersey.Routes;
 import org.joda.time.DateTime;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Order implements Record {
     private long id;
@@ -75,5 +73,14 @@ public class Order implements Record {
         for (OrderItem orderItem : orderItems)
             res += orderItem.getAmount() * orderItem.getQuantity();
         return res;
+    }
+
+    public Payment pay(Map payInfo) {
+        return new Payment();
+    }
+
+
+    public Optional<Payment> getPayment() {
+        return Optional.ofNullable(new Payment());
     }
 }

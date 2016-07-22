@@ -28,6 +28,8 @@ public class PaymentApi {
         if(nullFields.get("items").size() > 0) {
             return Response.status(Response.Status.BAD_REQUEST).entity(nullFields).build();
         }
+
+        order.pay(payInfo);
         return Response.created(URI.create("")).build();
     }
 }
