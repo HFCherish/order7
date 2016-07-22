@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.Map;
 
 public interface UserMapper {
-    User findById(@Param("id") String id);
+    User findById(@Param("id") long id);
 
     void save(@Param("info") Map info);
 

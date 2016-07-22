@@ -20,8 +20,7 @@ public class UsersApi {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response register(Map info,
                              @Context Routes routes) {
-        userRepository.save(info);
-        return Response.created(routes.userUrl(798l)).build();
+        return Response.created(routes.userUrl(userRepository.save(info).getId())).build();
     }
 
 //    @Path("{userId}")

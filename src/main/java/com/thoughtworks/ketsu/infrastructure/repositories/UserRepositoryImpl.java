@@ -10,16 +10,17 @@ import java.util.Optional;
 
 public class UserRepositoryImpl implements UserRepository {
 
-//    @Inject
-//    UserMapper userMapper;
+    @Inject
+    UserMapper userMapper;
 
     @Override
     public User save(Map info) {
-        return null;
+        userMapper.save(info);
+        return userMapper.findById(Long.valueOf(info.get("id").toString()));
     }
 
     @Override
     public Optional<User> findById(long id) {
-        return Optional.ofNullable(new User());
+        return Optional.ofNullable(userMapper.findById(id));
     }
 }
