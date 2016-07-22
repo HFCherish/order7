@@ -1,16 +1,20 @@
 package com.thoughtworks.ketsu.web;
 
+import com.thoughtworks.ketsu.domain.product.Product;
+import com.thoughtworks.ketsu.domain.product.ProductRepository;
 import com.thoughtworks.ketsu.support.ApiSupport;
 import com.thoughtworks.ketsu.support.ApiTestRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.thoughtworks.ketsu.support.TestHelper.prepareProduct;
 import static com.thoughtworks.ketsu.support.TestHelper.productJsonForTest;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -20,6 +24,9 @@ import static org.hamcrest.core.Is.is;
 @RunWith(ApiTestRunner.class)
 public class ProductApiTest extends ApiSupport {
     private String productBaseUrl = "/products";
+
+    @Inject
+    ProductRepository productRepository;
 
     @Test
     public void should_create_product() {
@@ -42,6 +49,17 @@ public class ProductApiTest extends ApiSupport {
         Map nameError = (Map)errors.get(0);
         assertThat(nameError.get("field"), is("name"));
         assertThat(nameError.get("message").toString(), containsString("name can not be empty"));
+
+    }
+
+    @Test
+    public void should_get_some_product() {
+        Product product = prepareProduct(productRepository);
+        String getOneUrl = productBaseUrl + "/" + product.getId();
+
+        Response response = get(getOneUrl);
+
+        assertThat(response.getStatus(), is(200));
 
     }
 }
