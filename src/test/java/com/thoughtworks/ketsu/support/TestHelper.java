@@ -27,6 +27,13 @@ public class TestHelper {
         }};
     }
 
+    public static Map<String, Object> paymentJsonForTest() {
+        return new HashMap<String, Object>() {{
+            put("pay_type", "CASH");
+            put("amount", 68970);
+        }};
+    }
+
     public static Map<String, Object> orderJsonForTest(long id) {
         return new HashMap<String, Object>() {{
             put("name", "Petrina");
