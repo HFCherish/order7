@@ -44,6 +44,6 @@ public class ProductApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> getAll() {
-        return new ArrayList<>();
+        return productRepository.findAll();
     }
 }
