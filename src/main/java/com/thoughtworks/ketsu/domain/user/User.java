@@ -27,7 +27,7 @@ public class User implements Record{
         return new HashMap<String, Object>() {{
             put("uri", routes.userUrl(getId()));
             put("name", getName());
-            put("id", getId());
+            put("id", String.valueOf(getId()));
         }};
     }
 
