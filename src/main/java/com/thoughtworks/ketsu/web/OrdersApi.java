@@ -2,7 +2,7 @@ package com.thoughtworks.ketsu.web;
 
 import com.thoughtworks.ketsu.domain.user.User;
 import com.thoughtworks.ketsu.web.jersey.Routes;
-import com.thoughtworks.ketsu.web.validators.FieldNotNullValidator;
+import com.thoughtworks.ketsu.web.validators.OrderValidator;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -25,8 +25,9 @@ public class OrdersApi {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response buildOrder(Map info,
-                               @Context Routes routes) {
-        Map<String, List> nullFields = new FieldNotNullValidator().getNullFields(Arrays.asList("name", "address", "phone"), info);
+                               @Context Routes routes,
+                               @Context OrderValidator orderValidator) {
+        Map<String, List> nullFields = orderValidator.getNullFields(Arrays.asList("name", "address", "phone", "order_items"), info);
         if(nullFields.get("items").size() > 0 ) {
             return Response.status(Response.Status.BAD_REQUEST).entity(nullFields).build();
         }

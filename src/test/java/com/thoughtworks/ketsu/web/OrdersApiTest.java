@@ -64,4 +64,12 @@ public class OrdersApiTest extends ApiSupport {
         assertThat(nameEmpty.get("field"), is("name"));
         assertThat(nameEmpty.get("message").toString(), containsString("name can not be empty"));
     }
+
+    @Test
+    public void should_400_when_create_order_given_invalid_order_items_info() {
+        Response response = post(orderBaseUrl, orderJsonForTest(product.getId()+1));
+
+        assertThat(response.getStatus(), is(400));
+
+    }
 }
