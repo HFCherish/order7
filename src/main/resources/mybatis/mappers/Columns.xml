@@ -9,6 +9,9 @@
         address,
         phone,
         user_id,
-        created_at
+        created_at,
+        product_id,
+        quantity,
+        amount
     </sql>
 </mapper>

@@ -4,6 +4,7 @@ import com.thoughtworks.ketsu.infrastructure.records.Record;
 import com.thoughtworks.ketsu.web.jersey.Routes;
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +56,13 @@ public class Order implements Record{
 
     @Override
     public Map<String, Object> toJson(Routes routes) {
-        return toRefJson(routes);
+        List itemsInfo = new ArrayList<>();
+        for(OrderItem item: orderItems) {
+            itemsInfo.add(item.toJson(routes));
+        }
+        Map<String, Object> info = toRefJson(routes);
+        info.put("order_items", itemsInfo);
+        return info;
     }
 
     public DateTime getCreatedAt() {
