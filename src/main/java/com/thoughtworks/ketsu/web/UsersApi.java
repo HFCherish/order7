@@ -1,34 +1,27 @@
-//package com.thoughtworks.ketsu.web;
-//
-//import com.thoughtworks.ketsu.domain.user.*;
-//import com.thoughtworks.ketsu.web.jersey.Routes;
-//
-//import javax.ws.rs.*;
-//import javax.ws.rs.core.Context;
-//import javax.ws.rs.core.MediaType;
-//import javax.ws.rs.core.Response;
-//
-//@Path("users")
-//public class UsersApi {
-//    @POST
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public Response createUser(CreateUserRequestBean info,
-//                               @Context UserRepository userRepository,
-//                               @Context Routes routes,
-//                               @Context EncryptionService encryptionService) {
-//        if (userRepository.ofId(new UserId(info.getId())).isPresent()) {
-//            throw new WebApplicationException(Response.Status.BAD_REQUEST);
-//        }
-//        User user = new User(
-//                new UserId(info.getId()),
-//                info.getName(),
-//                info.getEmail(),
-//                info.getRole() == null ? UserRole.DEV : info.getRole(),
-//                encryptionService.encrypt(info.getPassword()));
-//        userRepository.save(user);
-//        return Response.created(routes.userUrl(user)).build();
-//    }
-//
+package com.thoughtworks.ketsu.web;
+
+import com.thoughtworks.ketsu.web.jersey.Routes;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.Map;
+
+@Path("users")
+public class UsersApi {
+//    @Context
+//    UserRepository userRepository;
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response register(Map info,
+                             @Context Routes routes) {
+        return Response.created(routes.userUrl(798l)).build();
+    }
+
 //    @Path("{userId}")
 //    public UserApi getUser(@PathParam("userId") String userId,
 //                           @Context UserRepository userRepository) {
@@ -36,4 +29,4 @@
 //                .map(UserApi::new)
 //                .orElseThrow(() -> new WebApplicationException(Response.Status.NOT_FOUND));
 //    }
-//}
+}
