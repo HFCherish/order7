@@ -65,6 +65,7 @@ public class ProductApiTest extends ApiSupport {
     }
 
     private void verifyProductInfo(Product product, Map info) {
+        assertThat(Long.valueOf(info.get("id").toString()), is(product.getId()));
         assertThat(info.get("uri").toString(), containsString(productBaseUrl + "/" + product.getId()));
         assertThat(info.get("name"), is(product.getName()));
         assertThat((double)info.get("price"), is(product.getPrice()));
