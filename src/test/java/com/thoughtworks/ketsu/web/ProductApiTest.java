@@ -61,8 +61,14 @@ public class ProductApiTest extends ApiSupport {
 
         assertThat(response.getStatus(), is(200));
         Map info = response.readEntity(Map.class);
-        assertThat(info.get("uri").toString(), containsString(getOneUrl));
+        verifyProductInfo(product, info);
+    }
 
+    private void verifyProductInfo(Product product, Map info) {
+        assertThat(info.get("uri").toString(), containsString(productBaseUrl + "/" + product.getId()));
+        assertThat(info.get("name"), is(product.getName()));
+        assertThat((double)info.get("price"), is(product.getPrice()));
+        assertThat(info.get("description"), is(product.getDescription()));
     }
 
     @Test
@@ -83,6 +89,8 @@ public class ProductApiTest extends ApiSupport {
         Response response = get(productBaseUrl);
 
         assertThat(response.getStatus(), is(200));
-
+        List prods = response.readEntity(List.class);
+        assertThat(prods.size(), is(1));
+        verifyProductInfo(product, (Map)prods.get(0));
     }
 }
