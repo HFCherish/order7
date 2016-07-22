@@ -1,5 +1,6 @@
 package com.thoughtworks.ketsu.web;
 
+import com.thoughtworks.ketsu.domain.user.UserRepository;
 import com.thoughtworks.ketsu.web.jersey.Routes;
 
 import javax.ws.rs.Consumes;
@@ -12,13 +13,14 @@ import java.util.Map;
 
 @Path("users")
 public class UsersApi {
-//    @Context
-//    UserRepository userRepository;
+    @Context
+    UserRepository userRepository;
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response register(Map info,
                              @Context Routes routes) {
+        userRepository.save(info);
         return Response.created(routes.userUrl(798l)).build();
     }
 
