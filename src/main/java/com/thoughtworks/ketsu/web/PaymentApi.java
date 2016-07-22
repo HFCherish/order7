@@ -1,9 +1,11 @@
 package com.thoughtworks.ketsu.web;
 
 import com.thoughtworks.ketsu.domain.user.Order;
+import com.thoughtworks.ketsu.domain.user.Payment;
 import com.thoughtworks.ketsu.web.validators.FieldNotNullValidator;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -31,5 +33,11 @@ public class PaymentApi {
 
         order.pay(payInfo);
         return Response.created(URI.create("")).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Payment getPayment() {
+        return new Payment();
     }
 }
