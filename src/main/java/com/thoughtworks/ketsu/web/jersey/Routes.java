@@ -22,4 +22,8 @@ public class Routes {
     public URI orderUrl(long userId, long orderId) {
         return URI.create(baseUri + "users/" + userId + "/orders/" + orderId);
     }
+
+    public URI paymentUrl(long userId, long orderId) {
+        return URI.create(baseUri + "users/" + userId + "/orders/" + orderId + "/payment");
+    }
 }

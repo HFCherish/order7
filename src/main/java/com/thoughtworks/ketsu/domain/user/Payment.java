@@ -1,9 +1,20 @@
 package com.thoughtworks.ketsu.domain.user;
 
-public class Payment {
+import com.thoughtworks.ketsu.infrastructure.mybatis.mappers.OrderMapper;
+import com.thoughtworks.ketsu.infrastructure.records.Record;
+import com.thoughtworks.ketsu.web.jersey.Routes;
+
+import javax.inject.Inject;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Payment implements Record{
     private long orderId;
     private double amount;
     private PayType type;
+
+    @Inject
+    OrderMapper orderMapper;
 
     public long getOrderId() {
         return orderId;
@@ -15,5 +26,21 @@ public class Payment {
 
     public PayType getType() {
         return type;
+    }
+
+    @Override
+    public Map<String, Object> toRefJson(Routes routes) {
+        Order order = orderMapper.findById(getOrderId());
+        return new HashMap() {{
+            put("order_uri", routes.orderUrl(order.getUserId(), order.getId()));
+            put("uri", routes.paymentUrl(order.getUserId(), order.getId()));
+            put("pay_type", getType());
+            put("amount", getAmount());
+        }};
+    }
+
+    @Override
+    public Map<String, Object> toJson(Routes routes) {
+        return toRefJson(routes);
     }
 }
