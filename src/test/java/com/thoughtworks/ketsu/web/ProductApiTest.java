@@ -64,4 +64,15 @@ public class ProductApiTest extends ApiSupport {
         assertThat(info.get("uri").toString(), containsString(getOneUrl));
 
     }
+
+    @Test
+    public void should_404_when_get_product_given_not_exist() {
+        Product product = prepareProduct(productRepository);
+        String getOneUrl = productBaseUrl + "/1" + product.getId();
+
+        Response response = get(getOneUrl);
+
+        assertThat(response.getStatus(), is(404));
+
+    }
 }
