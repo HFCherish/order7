@@ -6,6 +6,7 @@ import com.thoughtworks.ketsu.domain.user.Payment;
 import com.thoughtworks.ketsu.domain.user.UserRepository;
 import com.thoughtworks.ketsu.support.ApiSupport;
 import com.thoughtworks.ketsu.support.ApiTestRunner;
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,6 +67,9 @@ public class PaymentApiTest extends ApiSupport {
         assertThat(info.get("amount"), is(payment.getAmount()));
         assertThat(info.get("order_uri").toString(), containsString("/users/" + order.getUserId() + "/orders/" + order.getId()));
         assertThat(info.get("uri").toString(), containsString(paymentBaseUrl));
+        assertThat(new DateTime(info.get("created_at")), is(payment.getCreatedAt()));
 
     }
+
+
 }
