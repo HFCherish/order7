@@ -12,4 +12,11 @@
         FROM products
         WHERE id = #{id}
     </select>
+
+    <select id="findAll" resultMap="records.product">
+        SELECT
+        *
+        FROM products
+    </select>
+
 </mapper>
