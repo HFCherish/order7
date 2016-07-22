@@ -60,6 +60,8 @@ public class ProductApiTest extends ApiSupport {
         Response response = get(getOneUrl);
 
         assertThat(response.getStatus(), is(200));
+        Map info = response.readEntity(Map.class);
+        assertThat(info.get("uri").toString(), containsString(getOneUrl));
 
     }
 }
