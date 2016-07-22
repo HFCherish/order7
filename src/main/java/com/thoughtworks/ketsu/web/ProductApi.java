@@ -30,7 +30,6 @@ public class ProductApi {
             return Response.status(Response.Status.BAD_REQUEST).entity(nullFields).build();
         }
 
-        productRepository.save(prodInfo);
-        return Response.created(routes.productUrl(89l)).build();
+        return Response.created(routes.productUrl(productRepository.save(prodInfo).getId())).build();
     }
 }
